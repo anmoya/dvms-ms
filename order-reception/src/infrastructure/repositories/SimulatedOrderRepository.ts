@@ -1,7 +1,7 @@
 import { Order } from "../../core/entities/Order";
-import { OrderRepository } from "../../interfaces/controllers/OrderController";
 import sqlite3 from 'sqlite3'
 import { open, Database } from 'sqlite'
+import { OrderRepository } from "../../interfaces/repositories/OrderRepository";
 
 
 export class SQLiteOrderRepository implements OrderRepository {
@@ -9,6 +9,12 @@ export class SQLiteOrderRepository implements OrderRepository {
 
     constructor() {
         this.initializeDatabase()
+    }
+    updateOrder(id: string | number, order: Order): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    getOrder(): Promise<Order[]> {
+        throw new Error("Method not implemented.");
     }
     private async initializeDatabase() {
         this.db = await open({

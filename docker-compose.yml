@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  order-reception:
+    build: ./order-reception
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/order-reception
+      - RABBITMQ_URI=amqp://rabbitmq
+      - DB_TYPE=mongodb
+    depends_on:
+      - mongo
+      - rabbitmq
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  mongo-data:

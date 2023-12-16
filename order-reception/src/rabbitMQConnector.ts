@@ -3,7 +3,7 @@
 import amqp from 'amqplib';
 
 export async function conectarRabbitMQ() {
-    const connection = await amqp.connect('amqp://localhost');
+    const connection = await amqp.connect(process.env.RABBITMQ_URI as string);
     const channel = await connection.createChannel();
     const queue = 'nombreDeTuCola';
 
